@@ -1,0 +1,21 @@
+@import "../../mixins";
+
+.filter {
+  display: inline-block;
+  height: auto;
+  width: 271px;
+  text-align: center;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 1.6rem;
+  text-decoration: none;
+  text-transform: capitalize;
+  color: var(--black-2);
+  overflow: hidden;
+  background-color: var(--bg-3);
+  @include smallDeviceSize {
+    display: none;
+  }
+}
