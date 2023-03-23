@@ -5,14 +5,14 @@ import { ITodoItem } from '../../../../interfaces/interfaces';
 import { Form } from '../Form/Form';
 import styles from './modal.module.scss';
 
-interface Props {
+interface TodoModalProps {
   type: string
   modalOpen: boolean
   todo?: ITodoItem
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const TodoModal = (props: Props): JSX.Element => {
+export const TodoModal = (props: TodoModalProps): JSX.Element => {
   const { type, modalOpen, setModalOpen, todo } = props;
   const [title, setTitle] = useState<string>('');
   const [deadline, setDeadline] = useState<string>('');

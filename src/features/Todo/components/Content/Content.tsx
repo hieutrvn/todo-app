@@ -6,11 +6,11 @@ import { useTodoContext } from '../../contexts/TodoContext';
 import { TodoItem } from '../TodoItem/TodoItem';
 import styles from './content.module.scss';
 
-interface Props {
+interface ContentProps {
   filterList: ITodoItem[]
 }
 
-export const Content = (props: Props): JSX.Element => {
+export const Content = (props: ContentProps): JSX.Element => {
   const { filterList } = props;
   const { state, dispatch } = useTodoContext();
   const { todos } = state;

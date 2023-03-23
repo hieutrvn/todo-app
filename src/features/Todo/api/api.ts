@@ -49,8 +49,8 @@ export const deleteTodoAPI = async (id: string): Promise<ITodoItem> => {
 
 export const toggleTodoAPI = async (todo: ITodoItem): Promise<ITodoItem> => {
   try {
-    const artical = { isComplete: !todo.isComplete };
-    const response = await axiosClient.put(`/todos/${todo.id}`, artical);
+    const status = { isComplete: !todo.isComplete };
+    const response = await axiosClient.put(`/todos/${todo.id}`, status);
     return response.data;
   } catch (error) {
     throw new Error('Failed to put data!');

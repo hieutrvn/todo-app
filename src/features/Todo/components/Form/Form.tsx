@@ -9,7 +9,7 @@ import { useTodoContext } from '../../contexts/TodoContext';
 import styles from './form.module.scss';
 import { ITodoItem } from '../../../../interfaces/interfaces';
 
-interface Props {
+interface FormProps {
   type: string
   title: string
   deadline: string
@@ -19,7 +19,7 @@ interface Props {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const Form = (props: Props): JSX.Element => {
+export const Form = (props: FormProps): JSX.Element => {
   const { type, title, deadline, todo, setModalOpen, setTitle, setDeadline } = props;
   const { state, dispatch } = useTodoContext();
   const { todos } = state;
@@ -45,9 +45,14 @@ export const Form = (props: Props): JSX.Element => {
     } else {
       if (type === 'add') {
         postTodoAPI(title, deadline)
-          .then(res => dispatch(addTodo(res)))
-          .catch(err => console.error(err));
-        toast.success('Task Added Successfully');
+          .then(res => {
+            dispatch(addTodo(res));
+            toast.success('Task Added Successfully');
+          })
+          .catch(err => {
+            console.error(err);
+            toast.error('Task Add Failed');
+          });
       }
       if (type === 'update') {
         const editedTodo = todos.filter((item) => item.id === todo?.id)[0];
@@ -55,9 +60,14 @@ export const Form = (props: Props): JSX.Element => {
           editedTodo.title = title;
           editedTodo.deadline = deadline;
           updateTodoAPI(editedTodo)
-            .then(res => dispatch(updateTodo(res)))
-            .catch(err => console.error(err));
-          toast.success('Task Updated Successfully');
+            .then(res => {
+              dispatch(updateTodo(res));
+              toast.success('Task Updated Successfully');
+            })
+            .catch(err => {
+              console.error(err);
+              toast.error('Task Update Failed');
+            });
         } else {
           toast.error('No changes made');
           return;

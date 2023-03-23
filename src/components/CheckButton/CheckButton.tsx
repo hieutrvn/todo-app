@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 import styles from './checkbutton.module.scss';
 
-interface Props {
+interface CheckButtonProps {
   checked: boolean
   onClick: (e: React.MouseEvent<HTMLElement>) => void
 }
@@ -27,7 +27,7 @@ const boxVariants = {
   unchecked: { background: 'var(--gray-2)', transition: { duration: 0.1 } }
 };
 
-export const CheckButton = (props: Props): JSX.Element => {
+export const CheckButton = (props: CheckButtonProps): JSX.Element => {
   const { checked, onClick } = props;
   const pathLength = useMotionValue(0);
   const opacity = useTransform(pathLength, [0.05, 0.15], [0, 1]);

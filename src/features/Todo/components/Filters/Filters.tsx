@@ -6,16 +6,16 @@ import { FILTERS } from '../../contexts/constants';
 import { useTodoContext } from '../../contexts/TodoContext';
 import styles from './filter.module.scss';
 
-interface Props {
+interface FiltersProps {
   filterList: ITodoItem[]
   setFilterList: React.Dispatch<React.SetStateAction<ITodoItem[]>>
 }
 
-export const Filters = (props: Props): JSX.Element => {
+export const Filters = (props: FiltersProps): JSX.Element => {
   const { filterList, setFilterList } = props;
   const { state, dispatch } = useTodoContext();
   const { todos, filter } = state;
-  const [count, setCount] = useState<string>('');
+  const [count, setCount] = useState<Number>(0);
 
   const handleChangeFilter = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     dispatch(updateFilterStatus(e.target.value));
@@ -33,7 +33,7 @@ export const Filters = (props: Props): JSX.Element => {
         setFilterList(todos);
     }
     const itemCompleted = todos.filter((item) => !item.isComplete);
-    setCount(itemCompleted.length.toString());
+    setCount(itemCompleted.length);
   }, [filter, todos]);
 
   return (

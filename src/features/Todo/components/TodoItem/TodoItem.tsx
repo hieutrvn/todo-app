@@ -10,14 +10,14 @@ import { deleteTodo, toggleTodo } from '../../contexts/actions';
 import { CheckButton } from '../../../../components/CheckButton/CheckButton';
 import { toast } from 'react-hot-toast';
 import { ButtonIcon } from '../../../../components/Button/Button';
-interface Props {
+interface TodoItemProps {
   todoTitle: string
   todoDeadline: string
   checked: boolean
   todo: ITodoItem
 }
 
-export const TodoItem = (props: Props): JSX.Element => {
+export const TodoItem = (props: TodoItemProps): JSX.Element => {
   const { todoTitle, todoDeadline, checked, todo } = props;
   const { dispatch } = useTodoContext();
   const [updateModalOpen, setUpdateModalOpen] = useState<boolean>(false);
@@ -34,9 +34,14 @@ export const TodoItem = (props: Props): JSX.Element => {
 
   const handleDelete = (): void => {
     deleteTodoAPI(todo.id)
-      .then(res => dispatch(deleteTodo(res.id)))
-      .catch(err => console.error(err));
-    toast.success('Task Deleted Successfully');
+      .then(res => {
+        dispatch(deleteTodo(res.id));
+        toast.success('Task Deleted Successfully');
+      })
+      .catch(err => {
+        console.error(err);
+        toast.error('Task Delete Failed');
+      });
   };
 
   return (
