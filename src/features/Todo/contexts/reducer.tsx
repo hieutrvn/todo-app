@@ -1,9 +1,9 @@
 import { ITodoItem, TodoState, TodoActions } from '../../../interfaces/interfaces';
-import { ACTION } from './constants';
+import { ACTION, FILTERS } from './constants';
 
 export const initialState: TodoState = {
   todos: [],
-  filter: 'All'
+  filter: FILTERS.All
 };
 
 export const reducer = (state: TodoState, action: TodoActions): TodoState => {

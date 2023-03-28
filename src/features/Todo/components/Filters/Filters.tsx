@@ -23,10 +23,10 @@ export const Filters = (props: FiltersProps): JSX.Element => {
 
   useEffect(() => {
     switch (filter) {
-      case 'Active':
+      case FILTERS.Active:
         setFilterList(todos.filter((item) => !item.isComplete));
         break;
-      case 'Completed':
+      case FILTERS.Completed:
         setFilterList(todos.filter((item) => item.isComplete));
         break;
       default:
@@ -39,13 +39,9 @@ export const Filters = (props: FiltersProps): JSX.Element => {
   return (
         <>
             <SelectedButton onChange={handleChangeFilter} >
-                {
-                    FILTERS.map((filter) => {
-                      return (
-                            <option key={filter.id}>{filter.option}</option>
-                      );
-                    })
-                }
+                <option value={FILTERS.All}>{FILTERS.All}</option>
+                <option value={FILTERS.Active}>{FILTERS.Active}</option>
+                <option value={FILTERS.Completed}>{FILTERS.Completed}</option>
             </SelectedButton>
             <div className={styles.filter}>
                 {filter === 'Completed'
