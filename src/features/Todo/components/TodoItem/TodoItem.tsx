@@ -63,7 +63,7 @@ export const TodoItem = (props: TodoItemProps): JSX.Element => {
                 </div>
                 <div className={styles.todoActions}>
                     <ButtonIcon style='icon' onClick={handleUpdate} ><MdEdit /></ButtonIcon>
-                    <ButtonIcon style='icon' onClick={handleDelete}><MdDelete /></ButtonIcon>
+                    <ButtonIcon style='icon__delete' onClick={handleDelete}><MdDelete /></ButtonIcon>
                 </div>
             </div>
             <TodoModal

@@ -10,7 +10,7 @@ interface BProps {
 
 interface BIProps {
   children: React.ReactNode
-  style: 'close' | 'icon'
+  style: 'close' | 'icon' | 'icon__delete'
   onClick: (event: React.MouseEvent<HTMLElement>) => void
 }
 
@@ -33,7 +33,7 @@ const Button = (props: BProps): JSX.Element => {
 const ButtonIcon = (props: BIProps): JSX.Element => {
   const { children, style, onClick } = props;
   return (
-        <div className={style === 'close' ? `${styles.closeButton}` : `${styles.icon}`} onClick={onClick}>{children}</div>
+        <div className={style === 'close' ? `${styles.closeButton}` : style === 'icon' ? `${styles.icon}` : `${styles.icon} ${styles.icon__delete}`} onClick={onClick}>{children}</div>
   );
 };
 
