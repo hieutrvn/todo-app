@@ -18,6 +18,6 @@ export const Header = (props: HeaderProps): JSX.Element => {
   return <div className={styles.appHeader}>
         <Filters filterList={filterList} setFilterList={setFilterList} />
         <Button type='button' variant='primary' onClick={() => setModalOpen(true)}>Create Task</Button>
-        <TodoModal type='add' modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        <TodoModal updateTask={!modalOpen} modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </div>;
 };

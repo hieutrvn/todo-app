@@ -10,17 +10,17 @@ import styles from './form.module.scss';
 import { ITodoItem } from '../../../../interfaces/interfaces';
 
 interface FormProps {
-  type: string
   title: string
   deadline: string
   todo?: ITodoItem
+  updateTask: boolean
   setTitle: React.Dispatch<React.SetStateAction<string>>
   setDeadline: React.Dispatch<React.SetStateAction<string>>
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const Form = (props: FormProps): JSX.Element => {
-  const { type, title, deadline, todo, setModalOpen, setTitle, setDeadline } = props;
+  const { title, deadline, todo, updateTask, setModalOpen, setTitle, setDeadline } = props;
   const { state, dispatch } = useTodoContext();
   const { todos } = state;
 
@@ -43,7 +43,7 @@ export const Form = (props: FormProps): JSX.Element => {
     } else if (deadline === '') {
       toast.error('Please enter a date finish');
     } else {
-      if (type === 'add') {
+      if (!updateTask) {
         postTodoAPI(title, deadline)
           .then(res => {
             dispatch(addTodo(res));
@@ -54,7 +54,7 @@ export const Form = (props: FormProps): JSX.Element => {
             toast.error('Task Add Failed');
           });
       }
-      if (type === 'update') {
+      if (updateTask) {
         const editedTodo = todos.filter((item) => item.id === todo?.id)[0];
         if (editedTodo.title !== title || editedTodo.deadline !== deadline) {
           editedTodo.title = title;
@@ -79,7 +79,7 @@ export const Form = (props: FormProps): JSX.Element => {
 
   return (
         <form className={styles.form}>
-            <h1 className={styles.formTitle}>{type === 'update' ? 'Update' : 'Add'} Task</h1>
+            <h1 className={styles.formTitle}>{updateTask ? 'Update' : 'Add'} Task</h1>
             <TextField
                 type='text'
                 placeHolder='Enter title...'
@@ -99,7 +99,7 @@ export const Form = (props: FormProps): JSX.Element => {
             </DatePicker>
             <label>
                 <div className={styles.buttonContainer}>
-                    <Button type='submit' variant='primary' onClick={handleSubmit}>{type === 'update' ? 'Update' : 'Add'} Task</Button>
+                    <Button type='submit' variant='primary' onClick={handleSubmit}>{updateTask ? 'Update' : 'Add'} Task</Button>
                     <Button type='button' variant='secondary' onClick={handleSetModal}>Cancel</Button>
                 </div>
             </label>

@@ -2,13 +2,14 @@ import axios from 'axios';
 import { ITodoItem } from '../../../interfaces/interfaces';
 
 export const axiosClient = axios.create({
-  baseURL: 'https://64113a532e340b45b13f5231.mockapi.io',
+  baseURL: process.env.REACT_APP_TODO_API,
+  timeout: 5000,
   headers: { 'X-Custom-Header': 'foobar' }
 });
 
 export const getTodosAPI = async (): Promise<ITodoItem[]> => {
   try {
-    const response = await axiosClient.get('/todos');
+    const response = await axiosClient.get('todos');
     return response.data;
   } catch (error) {
     throw new Error('Failed to get data!');
@@ -22,7 +23,7 @@ export const postTodoAPI = async (
 ): Promise<ITodoItem> => {
   try {
     const todo = { title, deadline, isComplete };
-    const response = await axiosClient.post('/todos', todo);
+    const response = await axiosClient.post('todos', todo);
     return response.data;
   } catch (error) {
     throw new Error('Failed to post data!');
@@ -31,7 +32,7 @@ export const postTodoAPI = async (
 
 export const updateTodoAPI = async (todo: ITodoItem): Promise<ITodoItem> => {
   try {
-    const response = await axiosClient.put(`/todos/${todo.id}`, todo);
+    const response = await axiosClient.put(`todos/${todo.id}`, todo);
     return response.data;
   } catch (error) {
     throw new Error('Failed to update data!');
@@ -40,7 +41,7 @@ export const updateTodoAPI = async (todo: ITodoItem): Promise<ITodoItem> => {
 
 export const deleteTodoAPI = async (id: string): Promise<ITodoItem> => {
   try {
-    const response = await axiosClient.delete(`/todos/${id}`);
+    const response = await axiosClient.delete(`todos/${id}`);
     return response.data;
   } catch (error) {
     throw new Error('Failed to delete data!');
@@ -50,7 +51,7 @@ export const deleteTodoAPI = async (id: string): Promise<ITodoItem> => {
 export const toggleTodoAPI = async (todo: ITodoItem): Promise<ITodoItem> => {
   try {
     const status = { isComplete: !todo.isComplete };
-    const response = await axiosClient.put(`/todos/${todo.id}`, status);
+    const response = await axiosClient.put(`todos/${todo.id}`, status);
     return response.data;
   } catch (error) {
     throw new Error('Failed to put data!');

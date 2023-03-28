@@ -67,7 +67,7 @@ export const TodoItem = (props: TodoItemProps): JSX.Element => {
                 </div>
             </div>
             <TodoModal
-                type='update'
+                updateTask={updateModalOpen}
                 modalOpen={updateModalOpen}
                 setModalOpen={setUpdateModalOpen}
                 todo={todo}

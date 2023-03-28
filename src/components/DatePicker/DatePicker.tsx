@@ -1,11 +1,11 @@
 import React from 'react';
 
 interface DataPickerProps {
-  children?: string
-  type?: string
-  id?: string
-  value?: string
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  children: string
+  type: string
+  id: string
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 
 }
 
