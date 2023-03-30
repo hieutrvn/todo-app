@@ -7,7 +7,7 @@
 ```
 yarn
 
-yarn prepare
+yarn start
 ```
 
 1. Create a powerful Todo app with React and Typescript. Read [react-typescript-cheatsheet](https://react-typescript-cheatsheet.netlify.app/)
